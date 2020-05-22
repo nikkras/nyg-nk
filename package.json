@@ -34,11 +34,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jam3/nyg-jam3.git"
+    "url": "git+https://github.com/nikkras/nyg-nk.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Jam3/nyg-jam3/issues"
+    "url": "https://github.com/nikkras/nyg-nk/issues"
   },
   "engines": {
     "node": ">=10.15.0",
