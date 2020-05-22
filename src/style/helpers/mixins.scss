@@ -1,0 +1,398 @@
+// Sass Mixins
+//
+// More information about mixins in:
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins
+// Add comment to every function
+
+/// Set Light Font as font family. This mixin's name is generic to abstract the font family name in case it changes
+/// @group Fonts
+/// @example scss Input
+///   .landing-section {
+///     @include font-light();
+///   }
+@mixin font-light() {
+  font-family: 'Fira Sans', #{$generic-fonts};
+  font-weight: 300;
+}
+
+/// Set Regular Font as font family. This mixin's name is generic to abstract the font family name in case it changes
+/// @group Fonts
+/// @example scss Input
+///   .landing-section {
+///     @include font-regular();
+///   }
+@mixin font-regular() {
+  font-family: 'Fira Sans', #{$generic-fonts};
+  font-weight: 400;
+}
+
+/// Set Bold Font as font family. This mixin's name is generic to abstract the font family name in case it changes
+/// @group Fonts
+/// @example scss Input
+///   .landing-section {
+///     @include font-bold();
+///   }
+@mixin font-bold() {
+  font-family: 'Fira Sans', #{$generic-fonts};
+  font-weight: 700;
+}
+
+/// Set Secondary Regular Font as font family. This mixin's name is generic to abstract the font family name in case it changes
+/// @group Fonts
+/// @example scss Input
+///   .landing-section {
+///     @include font-regular();
+///   }
+@mixin secondary-font-regular() {
+  font-family: 'Franziska', 'Times New Roman', Times, serif;
+  font-weight: 400;
+}
+
+/// Set Secondary RegularItalic  Font as font family. This mixin's name is generic to abstract the font family name in case it changes
+/// @group Fonts
+/// @example scss Input
+///   .landing-section {
+///     @include font-regular();
+///   }
+@mixin secondary-font-italic() {
+  font-family: 'Franziska', 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/// Improve animation performance for containers
+/// @example scss Input
+///   .card {
+///     @include gpu();
+///   }
+@mixin gpu {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+
+  .safari & {
+    perspective: none; // otherwise text and icons become blurry
+  }
+}
+
+/// Set exactly the same width and height of a component, avoid repeat the same dimension
+/// @parameter {Measure unit} $width - Specify width of the box
+/// @parameter {Measure unit} $height [$width] - Specify height of the box, the default value is the width
+/// @example scss Input
+///   .card {
+///     @include box(3.2rem);
+///   }
+///   .card-another {
+///     @include box(3.2rem, 2rem);
+///   }
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+/// Convert the pixels to rem for in a specific resolution, usually 1440px wide
+/// @example scss Input
+///   section {
+///     height: pxToRem(200);
+///   }
+$baseFontSize: 16;
+@function px-to-rem($pixels, $context: $baseFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+
+/// Set top and left to 0
+/// @example scss Input
+///   element {
+///     @include position-0;
+///   }
+@mixin position-0 {
+  top: 0;
+  left: 0;
+}
+
+/// Set full size of box and position
+/// @parameter {string} $pos - one of relative, absolute, fixed. relative by default
+/// @example scss Input
+///   element {
+///     @include position-100(absolute);
+///   }
+@mixin position-100($pos: 'relative') {
+  position: $pos;
+  @include position-0;
+  @include box(100%);
+}
+
+/// Set display flex and center children horizontally and vertically
+/// @example scss Input
+///   element {
+///     @include flex-center;
+///   }
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/// Set display flex and center children vertically
+/// @example scss Input
+///   element {
+///     @include flex-center-vert;
+///   }
+@mixin flex-center-vert {
+  display: flex;
+  align-items: center;
+}
+
+/// Set display flex and center children horizontally
+/// @example scss Input
+///   element {
+///     @include flex-center-horiz;
+///   }
+@mixin flex-center-horiz {
+  display: flex;
+  justify-content: center;
+}
+
+/// Center its element (horizontally and vertically) by using transform
+/// @example scss Input
+///   element {
+///     @include transform-center;
+///   }
+@mixin transform-center {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/// Set vertical center of its element
+/// @example scss Input
+///   element {
+///     @include transform-center-vert;
+///   }
+@mixin transform-center-vert {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/// Set horizontal center of its element
+/// @example scss Input
+///   element {
+///     @include transform-center-horiz;
+///   }
+@mixin transform-center-horiz {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/// Set z-index value in order of $element variable
+/// @example scss Input
+///   element {
+///     @include z-index(preloader);
+///   }
+@mixin z-index($id) {
+  z-index: index($elements, $id);
+}
+
+/// Reset button's look
+/// @example scss Input
+///   button {
+///     @include reset-button;
+///   }
+@mixin reset-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  text-align: inherit;
+  letter-spacing: inherit;
+  font-size: inherit;
+  text-transform: inherit;
+  color: inherit;
+}
+
+/// Fluid Typography
+/// https://css-tricks.com/snippets/css/fluid-typography/
+///
+/// html {
+///   @include fluid-type($min_font, $max_font, $min_width, $max_width);
+/// }
+
+$min-vw-default: map-get($layout-map, breakpoint-medium);
+$max-vw-default: map-get($layout-map, breakpoint-large);
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-font-size, $max-font-size, $min-vw: $min-vw-default, $max-vw: $max-vw-default) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(
+          #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+// Standard Eases Mixin
+// Example:
+// @include ease(in-out-quad);
+@mixin ease($easeType) {
+  $easeMap: (
+    linear: cubic-bezier(0.25, 0.25, 0.75, 0.75),
+    default: cubic-bezier(0.25, 0.1, 0.25, 1),
+    in: cubic-bezier(0.42, 0, 1, 1),
+    out: cubic-bezier(0, 0, 0.58, 1),
+    in-out: cubic-bezier(0.42, 0, 0.58, 1),
+    in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+    in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19),
+    in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+    in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06),
+    in-sine: cubic-bezier(0.47, 0, 0.745, 0.715),
+    in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035),
+    in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335),
+    in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045),
+    out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1),
+    out-quart: cubic-bezier(0.165, 0.84, 0.44, 1),
+    out-quint: cubic-bezier(0.23, 1, 0.32, 1),
+    out-sine: cubic-bezier(0.39, 0.575, 0.565, 1),
+    out-expo: cubic-bezier(0.19, 1, 0.22, 1),
+    out-circ: cubic-bezier(0.075, 0.82, 0.165, 1),
+    out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955),
+    in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1),
+    in-out-quart: cubic-bezier(0.77, 0, 0.175, 1),
+    in-out-quint: cubic-bezier(0.86, 0, 0.07, 1),
+    in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95),
+    in-out-expo: cubic-bezier(1, 0, 0, 1),
+    in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55)
+  );
+  transition-timing-function: map-get($easeMap, $easeType);
+}
+
+// clean
+@mixin clean {
+  margin: 0;
+  padding: 0;
+}
+
+// clean
+@mixin fill {
+  width: 100%;
+  height: 100%;
+}
+
+
+// retina images on background
+@mixin retinaImage($file, $type, $width, $height, $horizontal_pos: left, $vertical_pos: top) {
+  background-image: image-url($file + '.' + $type);
+  background-position: $vertical_pos $horizontal_pos;
+  background-repeat: no-repeat;
+  -webkit-background-size: $width $height;
+  -moz-background-size: $width $height;
+  -o-background-size: $width $height;
+  background-size: $width $height;
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (-moz-min-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    & {
+      background-image: image-url($file + '@2x.' + $type);
+      -webkit-background-size: $width $height;
+      -moz-background-size: $width $height;
+      -o-background-size: $width $height;
+      background-size: $width $height;
+      background-position: $vertical_pos $horizontal_pos;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+// crop top space on text elements - caused by line height
+@mixin lhCrop($line-height, $capital-letter: 1) {
+  &::before {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    margin-top: calc((#{$capital-letter} - #{$line-height}) * 0.5em);
+  }
+}
+
+// CSS triangle
+@mixin triangle($direction: up, $width: 12px, $color: red) {
+  width: 0;
+  height: 0;
+  border: $width solid transparent;
+
+  @if ($direction == left) {
+    border-right-color: $color;
+  } @else if($direction == right) {
+    border-left-color: $color;
+  } @else if($direction == down) {
+    border-top-color: $color;
+  } @else {
+    border-bottom-color: $color;
+  }
+}
+
+// clearfix
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin fontSmooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// center with absolute & transform
+@mixin center($xy: xy, $centerX: -50%, $centerY: -50%) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    transform: translate($centerX, $centerY);
+  } // xy
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    transform: translateX($centerX);
+  } // x
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    transform: translateY($centerY);
+  } // y
+} // @mixin center
+

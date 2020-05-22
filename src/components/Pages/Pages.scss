@@ -1,0 +1,22 @@
+@import 'src/style/shared.scss';
+
+.Pages {
+  position: relative;
+  text-align: center;
+  padding-top: $navbar-height-mobile;
+  @include z-index(pages);
+  // flex: 1;
+
+  @include media('>=medium') {
+    padding-top: $navbar-height-tablet;
+  }
+  @include media('>=large') {
+    padding-top: $navbar-height-desktop;
+  }
+
+  & > section {
+    // padding-bottom: px-to-rem(40);
+    width: 100%;
+    opacity: 0;
+  }
+}

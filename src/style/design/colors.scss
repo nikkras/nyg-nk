@@ -1,0 +1,28 @@
+:root {
+  --color-blue: #1E90FF;
+
+  --color-green: #32CD32;
+
+  --color-red: #FF0000;
+
+  --main-white: white;
+  --main-black: #000000;
+  --main-gray: #474747;
+
+  --grey-9: #232323;
+  --grey-8: #353535;
+  --grey-7: #474747;
+  --grey-6: #757575;
+  --grey-5: #a3a3a3;
+  --grey-4: #bfbfbf;
+  --grey-3: #dadada;
+  --grey-2: #ededed;
+  --grey-1: #f6f6f6;
+}
+
+.color-text-green {
+  color: var(--color-green);
+}
+.color-text-blue {
+  color: var(--color-blue);
+}

@@ -1,0 +1,7 @@
+$breakpoints: (
+  xsmall: map-get($layout-map, breakpoint-xsmall),
+  small: map-get($layout-map, breakpoint-small),
+  medium: map-get($layout-map, breakpoint-medium),
+  large: map-get($layout-map, breakpoint-large),
+  xlarge: map-get($layout-map, breakpoint-xlarge)
+);
