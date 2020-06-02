@@ -1,0 +1,55 @@
+@import 'src/style/shared.scss';
+
+.contactForm {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .recapthca {
+    @extend %hide-element;
+  }
+}
+.contactForm__row {
+  width: 100%;
+  display: block;
+  padding-bottom: var(--space-sm);
+  label {
+    display: block;
+    width: 100%;
+    color: var(--grey-8);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    padding-bottom: var(--space-xxs);
+  }
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    border: 0;
+    font-size: calc(var(--text-md) * 0.7);
+    padding: var(--space-sm);
+    background-color: var(--grey-2);
+  }
+  textarea {
+    min-height: px-to-rem(120);
+  }
+  .response {
+    text-align: center;
+    width: 100%;
+    color: var(--grey-8);
+    display: block;
+  }
+  &--submit {
+    text-align: center;
+  }
+}
+.contactForm__submit {
+  padding: var(--space-xxs) var(--space-md);
+  background-color: var(--main-dark);
+  color: $white;
+}
+
+.grecaptcha-badge {
+  right: auto !important;
+  @extend %hide-element;
+}

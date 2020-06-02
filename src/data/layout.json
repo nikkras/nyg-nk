@@ -1,13 +1,19 @@
 {
-  "xsmall": 320,
-  "small": 414,
+  "xsmall": 370,
+  "small": 400,
   "medium": 768,
-  "large": 1200,
-  "xlarge": 1920,
-  "breakpoint-xsmall": "320px",
-  "breakpoint-small": "414px",
+  "large": 1100,
+  "hd": 1280,
+  "mlarge": 1440,
+  "fullhd": 1920,
+  "xlarge": 2200,
+  "breakpoint-xsmall": "370px",
+  "breakpoint-small": "400px",
   "breakpoint-medium": "768px",
-  "breakpoint-large": "1200px",
-  "breakpoint-xlarge": "1920px",
-  "max-width-large": "1160px"
+  "breakpoint-large": "1100px",
+  "breakpoint-hd": "1280px",
+  "breakpoint-mlarge": "1440px",
+  "breakpoint-fullhd": "1920px",
+  "breakpoint-xlarge": "2200px",
+  "max-width-large": "1400px"
 }

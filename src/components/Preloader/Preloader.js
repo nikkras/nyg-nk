@@ -201,5 +201,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// export default connect(mapStateToProps, mapDispatchToProps, undefined, { forwardRef: true })(Preloader);
-export default connect(mapStateToProps, mapDispatchToProps)(Preloader);
+export default connect(mapStateToProps, mapDispatchToProps, undefined, { forwardRef: true })(Preloader);
+// export default connect(mapStateToProps, mapDispatchToProps)(Preloader);

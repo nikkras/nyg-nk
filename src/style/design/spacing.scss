@@ -15,11 +15,20 @@
   --component-padding: var(--space-xl);
 
   // reset to all devices
-  @include media('>=xsmall') {
+  @include media('>=320px') {
     --space-unit: 1.25em;
+    --component-padding: var(--space-sm);
+  }
+
+  @include media('>=medium') {
+    --component-padding: var(--space-lg);
   }
 
   @include media('>=large') {
     --space-unit: 1.5em;
+    --component-padding: calc(var(--space-xl) * 1.1);
+  }
+  @include media('>=hd') {
+    --component-padding: calc(var(--space-xl) * 1.2);
   }
 }

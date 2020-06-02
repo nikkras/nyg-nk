@@ -77,6 +77,7 @@ class About extends React.PureComponent {
       divs: divs,
       footer: this.footer,
       preload: true,
+      ease: 0.1,
       vs: {
         mouseMultiplier: 0.4,
         touchMultiplier: 2,

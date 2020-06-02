@@ -75,11 +75,13 @@
     "howler": "2.2.0",
     "include-media": "1.4.9",
     "inject-prefetch": "0.1.2",
+    "intersection-observer": "0.10.0",
     "lodash.debounce": "4.0.8",
     "mdn-polyfills": "^5.20.0",
     "mobile-detect": "^1.4.4",
     "no-op": "1.0.3",
     "normalize.css": "8.0.1",
+    "object-fit-images": "3.2.4",
     "preloader": "4.0.3",
     "raw-loader": "^4.0.1",
     "react": "16.13.1",
@@ -169,7 +171,7 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
+    "not ie < 11",
     "not op_mini all"
   ]
 }

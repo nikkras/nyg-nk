@@ -1,7 +1,8 @@
+import './util/polyfills';
+
 import 'normalize.css';
 
 import './util/unsupported';
-import './util/polyfills';
 import framework from './framework';
 import * as serviceWorker from './serviceWorker';
 

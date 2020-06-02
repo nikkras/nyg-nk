@@ -48,6 +48,8 @@ class App extends React.PureComponent {
     }
 
     window.addEventListener('resize', this.handleResize);
+
+    // this.setVh();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +60,9 @@ class App extends React.PureComponent {
     if (prevProps.location.pathname !== this.props.location.pathname) {
       this.props.setPreviousRoute(prevProps.location.pathname);
     }
+    // if (prevProps.windowSize.height !== this.props.windowSize.height) {
+    //   this.setVh();
+    // }
   }
 
   componentWillUnmount() {
@@ -67,6 +72,11 @@ class App extends React.PureComponent {
   handleResize = debounce(() => {
     this.props.setLayout(window.innerWidth, window.innerHeight, layout.all);
   }, settings.resizeDebounceTime);
+
+  // setVh = () => {
+  //   let vh = this.props.windowSize.height * 0.01;
+  //   document.documentElement.style.setProperty('--vh', `${vh}px`);
+  // };
 
   render() {
     return (
@@ -120,6 +130,7 @@ const mapStateToProps = (state) => {
     siteData: state.siteData,
     ready: preloadAssets.length ? state.preloader.ready : true,
     isMobileMenuOpen: state.isMobileMenuOpen,
+    // windowSize: state.windowSize,
   };
 };
 
@@ -139,6 +150,7 @@ App.propTypes = checkProps({
   setIsMobileMenuOpen: PropTypes.func.isRequired,
   setLayout: PropTypes.func.isRequired,
   siteData: PropTypes.object.isRequired,
+  // windowSize: PropTypes.object,
 });
 
 App.defaultProps = {};
