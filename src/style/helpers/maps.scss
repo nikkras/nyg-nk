@@ -3,5 +3,8 @@ $breakpoints: (
   small: map-get($layout-map, breakpoint-small),
   medium: map-get($layout-map, breakpoint-medium),
   large: map-get($layout-map, breakpoint-large),
-  xlarge: map-get($layout-map, breakpoint-xlarge)
+  hd: map-get($layout-map, breakpoint-hd),
+  mlarge: map-get($layout-map, breakpoint-mlarge),
+  fullhd: map-get($layout-map, breakpoint-fullhd),
+  xlarge: map-get($layout-map, breakpoint-xlarge),
 );
